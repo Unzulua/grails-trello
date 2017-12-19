@@ -25,12 +25,15 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
+    compile 'io.github.http-builder-ng:http-builder-ng-core:1.0.3'
     console "org.grails:grails-console"
     profile "org.grails.profiles:plugin"
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
     testCompile "org.grails:grails-gorm-testing-support"
     testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.springframework.boot:spring-boot-starter-tomcat"
+    testCompile "org.grails:grails-web-testing-support"
 }
 
 bootRun {

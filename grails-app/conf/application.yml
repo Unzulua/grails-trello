@@ -27,3 +27,13 @@ endpoints:
     enabled: false
     jmx:
         enabled: true
+
+environments:
+    development:
+      trello:
+        apiKey: '767eb76839c0c9afd7ce1d7d2fb1c22f'
+        oauthToken: 'bcab1341063eee58da81b79e5d1e93d2b83feb9003ce2a83290042c33886832f'
+    test:
+      trello:
+        apiKey: '767eb76839c0c9afd7ce1d7d2fb1c22f'
+        oauthToken: 'bcab1341063eee58da81b79e5d1e93d2b83feb9003ce2a83290042c33886832f'
