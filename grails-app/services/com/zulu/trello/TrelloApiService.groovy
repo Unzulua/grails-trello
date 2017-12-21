@@ -35,7 +35,7 @@ class TrelloApiService {
             config.boards.collect { boardId ->
                 builder.get {
                     request.uri.path = "/${VERSION}/${BOARDS}/${boardId}/${CARDS}/open"
-                    request.uri.query = [fields : 'id,name,due'] + apiParams
+                    request.uri.query = [fields: 'id,name,due,desc'] + apiParams
                 }.collect{ params ->
                     Card card = Card.from(params)
                     if (card.expireBetween(from,to)){
