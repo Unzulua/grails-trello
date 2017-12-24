@@ -2,6 +2,7 @@ package com.zulu.trello
 
 import com.foozulu.domain.Board
 import com.foozulu.domain.Card
+import com.foozulu.domain.Activity
 import grails.core.GrailsApplication
 import groovyx.net.http.HttpBuilder
 
@@ -9,7 +10,7 @@ class TrelloApiService {
 
     GrailsApplication grailsApplication
 
-    static String BASE_URL = "https://api.trello.com"
+    String BASE_URL = "https://api.trello.com"
     static String VERSION = "1"
     static String BOARDS = "boards"
     static String CARDS = "cards"
@@ -48,6 +49,19 @@ class TrelloApiService {
 
     }
 
+    List<Activity> retrieveActivities(Integer limit){
+        (List<Activity>) query{ HttpBuilder builder, Map apiParams, Map config ->
+            config.boards.collect { boardId ->
+                builder.get {
+                    request.uri.path = "/${VERSION}/${BOARDS}/${boardId}/actions"
+                    request.uri.query = [
+                         limit : limit
+                     ] + apiParams
+                }.collect{ Activity.from(it) }
+            }.flatten()
+        }
+    }
+
     private query(Closure closure){
         Map config = grailsApplication.config.trello
         HttpBuilder builder = HttpBuilder.configure {
@@ -60,6 +74,4 @@ class TrelloApiService {
         ]
         closure.call(builder, params, config)
     }
-
-
 }
