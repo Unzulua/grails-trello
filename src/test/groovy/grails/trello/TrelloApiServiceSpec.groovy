@@ -1,7 +1,7 @@
 package com.zulu.trello
 
-import com.foozulu.domain.Activity
-import com.foozulu.domain.ActivityType
+import com.foozulu.domain.Action
+import com.foozulu.domain.ActionType
 
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
@@ -15,7 +15,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
     config.trello.boards = ['aBoardName']
   }
 
-  def "Retrieve last activity from a board"(){
+  def "Retrieve last action from a board"(){
     given:
 		  Integer numberOfActions = 1
 			List arrayOfActions = [ [
@@ -31,14 +31,14 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
 			service.BASE_URL = mockResponse(uri, arrayOfActions, ['limit', numberOfActions.toString()])
     when:
-			Activity activity = service.retrieveActivities(numberOfActions).first()
+			Action action = service.retrieveActions(numberOfActions).first()
 
     then:
-      activity.cardName == 'With due date'
-      activity.user == 'jjballano'
-      activity.project == 'First list'
-      activity.date.toString() == 'Thu Dec 21 00:00:00 UTC 2017'
-      activity.type == ActivityType.UPDATE_CARD
+      action.cardName == 'With due date'
+      action.user == 'jjballano'
+      action.project == 'First list'
+      action.date.toString() == 'Thu Dec 21 00:00:00 UTC 2017'
+      action.type == ActionType.UPDATE_CARD
   }
 
 
