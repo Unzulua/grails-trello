@@ -11,6 +11,8 @@ class Action {
     Date date
 		Map original
 
+    static allowedTypes = ["updateCard", "createCard"]
+
     static Action from(Map params) {
       new Action(
 				user: params.memberCreator.username,
@@ -23,9 +25,13 @@ class Action {
 
     }
 
-	 String toString(){
-		 "${user}@${project}"
-	 }
+    static List<Action> fromList(List rawActions){
+      rawActions.findAll{allowedTypes.contains(it.type)}.collect{ Action.from(it) }
+    }
+
+  	String toString(){
+		  "${user}@${project}"
+	  }
 }
 
 //https://developers.trello.com/reference#action-types

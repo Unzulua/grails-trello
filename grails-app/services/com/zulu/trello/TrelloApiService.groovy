@@ -51,14 +51,15 @@ class TrelloApiService {
 
     List<Action> retrieveActions(Integer limit){
         (List<Action>) query{ HttpBuilder builder, Map apiParams, Map config ->
-            config.boards.collect { boardId ->
+            def response = config.boards.collect { boardId ->
                 builder.get {
                     request.uri.path = "/${VERSION}/${BOARDS}/${boardId}/actions"
                     request.uri.query = [
                          limit : limit
                      ] + apiParams
-                }.collect{ Action.from(it) }
+                }
             }.flatten()
+            Action.fromList(response)
         }
     }
 

@@ -41,6 +41,27 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
       action.type == ActionType.UPDATE_CARD
   }
 
+  def "Filters actions of create and update card"() {
+    given:
+		  Integer numberOfActions = 1
+			List arrayOfActions = [ [
+				data: [
+					list: [name:'First list'],
+					],
+				date: '2017-12-21T10:14:27.060Z',
+				type: 'createList',
+				memberCreator: [username:'jjballano']
+			] ]
+			String uri = "/1/boards/${config.trello.boards.first()}/actions"
+
+			service.BASE_URL = mockResponse(uri, arrayOfActions, ['limit', numberOfActions.toString()])
+    when:
+			List<Action> actions = service.retrieveActions(numberOfActions)
+
+    then:
+      actions.size() == 0
+  }
+
 
 	private String mockResponse(String uri, Object response, List params) {
 			ErsatzServer ersatz = new ErsatzServer()
