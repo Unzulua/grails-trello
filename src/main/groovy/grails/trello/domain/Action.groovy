@@ -16,8 +16,8 @@ class Action {
     static Action from(Map params) {
       new Action(
 				user: params.memberCreator.username,
-        cardName: params.data.card.name,
-        project: params.data.list.name,
+        cardName: params.data.card != null ? params.data.card.name: "",
+        project: params.data.list != null? params.data.list.name : "",
 				date: Date.parse('yyyy-MM-dd', params.date),
 				type: params.type == 'updateCard' ? ActionType.UPDATE_CARD : ActionType.CREATE_CARD,
 				original: params
