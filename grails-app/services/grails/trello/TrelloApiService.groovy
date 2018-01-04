@@ -1,8 +1,8 @@
-package com.zulu.trello
+package grails.trello
 
-import com.foozulu.domain.Board
-import com.foozulu.domain.Card
-import com.foozulu.domain.Action
+import grails.trello.domain.Board
+import grails.trello.domain.Card
+import grails.trello.domain.Action
 import grails.core.GrailsApplication
 import groovyx.net.http.HttpBuilder
 

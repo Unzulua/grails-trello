@@ -1,7 +1,7 @@
-package com.zulu.trello
+package grails.trello
 
-import com.foozulu.domain.Board
-import com.foozulu.domain.Card
+import grails.trello.domain.Board
+import grails.trello.domain.Card
 import grails.core.GrailsApplication
 import grails.testing.mixin.integration.Integration
 import spock.lang.Specification

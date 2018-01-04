@@ -1,13 +1,12 @@
-package com.zulu.trello
+package grails.trello
 
-import com.foozulu.domain.Action
-import com.foozulu.domain.ActionType
-
-import grails.testing.services.ServiceUnitTest
-import spock.lang.Specification
-import com.stehno.ersatz.ErsatzServer
 import com.stehno.ersatz.ContentType
 import com.stehno.ersatz.Encoders
+import com.stehno.ersatz.ErsatzServer
+import grails.testing.services.ServiceUnitTest
+import grails.trello.domain.Action
+import grails.trello.domain.ActionType
+import spock.lang.Specification
 
 class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<TrelloApiService> {
 

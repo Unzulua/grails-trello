@@ -35,6 +35,10 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-tomcat"
     testCompile "org.grails:grails-web-testing-support"
     testCompile 'com.stehno.ersatz:ersatz:1.6.0'
+    //Next two are required by ersatz
+    testCompile 'io.undertow:undertow-core:1.4.21.Final'
+    testCompile 'io.undertow:undertow-servlet:1.4.21.Final'
+
 }
 
 bootRun {

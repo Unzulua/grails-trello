@@ -1,4 +1,4 @@
-package com.foozulu.domain
+package grails.trello.domain
 
 import grails.util.Holders
 
