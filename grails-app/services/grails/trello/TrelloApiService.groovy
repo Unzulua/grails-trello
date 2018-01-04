@@ -49,6 +49,16 @@ class TrelloApiService {
 
     }
 
+    grails.trello.domain.List findList(String id){
+        (grails.trello.domain.List) query{ HttpBuilder builder, Map apiParams, Map config ->
+                def response = builder.get {
+                    request.uri.path = "/${VERSION}/lists/${id}"
+                    request.uri.query = apiParams
+                }
+                grails.trello.domain.List.from(response)
+            }
+    }
+
     List<Action> retrieveActions(Integer limit){
         (List<Action>) query{ HttpBuilder builder, Map apiParams, Map config ->
             def response = config.boards.collect { boardId ->

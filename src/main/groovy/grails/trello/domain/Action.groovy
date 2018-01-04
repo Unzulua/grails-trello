@@ -25,7 +25,7 @@ class Action {
 
     }
 
-    static List<Action> fromList(List rawActions){
+    static java.util.List<Action> fromList(java.util.List rawActions){
       rawActions.findAll{allowedTypes.contains(it.type)}.collect{ Action.from(it) }
     }
 

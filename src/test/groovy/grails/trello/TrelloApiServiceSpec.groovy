@@ -61,12 +61,28 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
       actions.size() == 0
   }
 
+  def "Retrieves a list by its id"() {
+      given:
+        def aList = [
+          "id": "5a3940b214fd8aba24433229",
+          "name": "Albacete",
+          "idBoard": "560bf4298b3dda300c18d09c"
+        ]
+			  String uri = "/1/lists/${aList.id}"
 
-	private String mockResponse(String uri, Object response, List params) {
+        service.BASE_URL = mockResponse(uri, aList)
+      when:
+        grails.trello.domain.List list = service.findList("5a3940b214fd8aba24433229")
+
+      then:
+        list.name == "Albacete"
+        list.id == aList.id
+  }
+
+	private String mockResponse(String uri, Object response, List params=null) {
 			ErsatzServer ersatz = new ErsatzServer()
 			ersatz.expectations {
-					get(uri) {
-							query(params)
+					def mock = get(uri) {
 							called(1)
 							responder {
 									encoder(ContentType.APPLICATION_JSON, response.getClass(), Encoders.json)
@@ -74,6 +90,9 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 									content( response, ContentType.APPLICATION_JSON)
 							}
 					}
+          if(params != null)
+            mock = mock.query(params)
+          mock
 			}
 			ersatz.httpUrl
 	}
