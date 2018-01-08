@@ -8,6 +8,7 @@ class Card {
     String name
     Date dueDate
     String description
+    String idList
 
     static Card from(Map params) {
         new Card(params)

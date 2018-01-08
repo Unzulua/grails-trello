@@ -79,6 +79,16 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
         list.id == aList.id
   }
 
+  def "Returns an empty list if the id is empty"() {
+      when:
+        grails.trello.domain.List list = service.findList(null)
+
+      then:
+        list.name == ""
+        list.id == ""
+  }
+
+
 	private String mockResponse(String uri, Object response, List params=null) {
 			ErsatzServer ersatz = new ErsatzServer()
 			ersatz.expectations {

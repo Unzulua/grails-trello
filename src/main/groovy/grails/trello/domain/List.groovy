@@ -15,4 +15,7 @@ class List {
     )
   }
 
+  static List buildNull(){
+    new List(id: "", name: "")
+  }
 }

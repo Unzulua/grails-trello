@@ -32,11 +32,13 @@ class TrelloApiService {
     }
 
     List<Card> findAllCardsByDueDate(Date from, Date to = null){
+        String fieldsToRetrieve =  'id,name,due,desc,idList'
+
         (List<Card>) query{ HttpBuilder builder, Map apiParams, Map config ->
             config.boards.collect { boardId ->
                 builder.get {
                     request.uri.path = "/${VERSION}/${BOARDS}/${boardId}/${CARDS}/open"
-                    request.uri.query = [fields: 'id,name,due,desc'] + apiParams
+                    request.uri.query = [fields: fieldsToRetrieve] + apiParams
                 }.collect{ params ->
                     Card card = Card.from(params)
                     if (card.expireBetween(from,to)){
@@ -50,6 +52,9 @@ class TrelloApiService {
     }
 
     grails.trello.domain.List findList(String id){
+        if(id == null) {
+            return grails.trello.domain.List.buildNull()
+        }
         (grails.trello.domain.List) query{ HttpBuilder builder, Map apiParams, Map config ->
                 def response = builder.get {
                     request.uri.path = "/${VERSION}/lists/${id}"
