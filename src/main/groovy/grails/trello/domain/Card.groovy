@@ -9,8 +9,10 @@ class Card {
     Date dueDate
     String description
     String idList
+    java.util.List<String> labels
 
     static Card from(Map params) {
+        params.labels = params.labels?.collect{ it.name }
         new Card(params)
     }
 

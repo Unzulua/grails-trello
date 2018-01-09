@@ -32,7 +32,7 @@ class TrelloApiService {
     }
 
     List<Card> findAllCardsByDueDate(Date from, Date to = null){
-        String fieldsToRetrieve =  'id,name,due,desc,idList'
+        String fieldsToRetrieve =  'id,name,due,desc,idList,labels'
 
         (List<Card>) query{ HttpBuilder builder, Map apiParams, Map config ->
             config.boards.collect { boardId ->
