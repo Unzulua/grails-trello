@@ -30,7 +30,7 @@ class Action {
     }
 
   	String toString(){
-		  "${user}@${project}"
+		  "${type} ${user}@${project}"
 	  }
 }
 
