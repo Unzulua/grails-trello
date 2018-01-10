@@ -1,6 +1,7 @@
 package grails.trello
 
 import grails.trello.domain.Board
+import grails.trello.domain.BoardList
 import grails.trello.domain.Card
 import grails.trello.domain.Action
 import grails.core.GrailsApplication
@@ -51,16 +52,16 @@ class TrelloApiService {
 
     }
 
-    grails.trello.domain.List findList(String id){
+    BoardList findList(String id){
         if(id == null) {
-            return grails.trello.domain.List.buildNull()
+            return BoardList.buildNull()
         }
-        (grails.trello.domain.List) query{ HttpBuilder builder, Map apiParams, Map config ->
+        (BoardList) query{ HttpBuilder builder, Map apiParams, Map config ->
                 def response = builder.get {
                     request.uri.path = "/${VERSION}/lists/${id}"
                     request.uri.query = apiParams
                 }
-                grails.trello.domain.List.from(response)
+                BoardList.from(response)
             }
     }
 

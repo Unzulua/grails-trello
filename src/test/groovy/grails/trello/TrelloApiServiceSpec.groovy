@@ -6,6 +6,7 @@ import com.stehno.ersatz.ErsatzServer
 import grails.testing.services.ServiceUnitTest
 import grails.trello.domain.Action
 import grails.trello.domain.ActionType
+import grails.trello.domain.BoardList
 import spock.lang.Specification
 
 class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<TrelloApiService> {
@@ -71,7 +72,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
         service.BASE_URL = mockResponse(uri, aList)
         when:
-        grails.trello.domain.List list = service.findList("5a3940b214fd8aba24433229")
+        BoardList list = service.findList("5a3940b214fd8aba24433229")
 
         then:
         list.name == "Albacete"
@@ -80,7 +81,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
     def "Returns an empty list if the id is empty"() {
         when:
-        grails.trello.domain.List list = service.findList(null)
+        BoardList list = service.findList(null)
 
         then:
         list.name == ""
