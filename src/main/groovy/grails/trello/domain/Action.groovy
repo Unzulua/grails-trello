@@ -8,6 +8,7 @@ class Action {
     String user
     String cardName
     String project
+    String id
     Date date
     Map original
 
@@ -15,6 +16,7 @@ class Action {
 
     static Action from(Map params) {
         new Action(
+            id: params.id,
             user: params.memberCreator.username,
             cardName: params.data.card != null ? params.data.card.name : "",
             project: params.data.list != null ? params.data.list.name : "",
