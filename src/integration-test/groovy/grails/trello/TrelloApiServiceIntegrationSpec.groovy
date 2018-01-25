@@ -15,7 +15,7 @@ class TrelloApiServiceIntegrationSpec extends Specification{
 
     def "boards should be able to get all boards"(){
         when:
-        List<Board> boards = trelloApiService.boards()
+        List<Board> boards = trelloApiService.findBoards()
 
         then:
         boards*.name == ['for testing purposes']

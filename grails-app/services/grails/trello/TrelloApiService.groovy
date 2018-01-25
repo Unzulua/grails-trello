@@ -16,7 +16,7 @@ class TrelloApiService {
     static String BOARDS = "boards"
     static String CARDS = "cards"
 
-    List<Board> boards() {
+    List<Board> findBoards() {
         (List<Board>) query{ HttpBuilder builder, Map apiParams, Map config ->
             config.boards.collect { boardId ->
                 Map boardParams = builder.get {
@@ -65,7 +65,7 @@ class TrelloApiService {
             }
     }
 
-    List<Action> retrieveActions(Integer limit){
+    List<Action> findActions(Integer limit){
         (List<Action>) query{ HttpBuilder builder, Map apiParams, Map config ->
             def response = config.boards.collect { boardId ->
                 builder.get {

@@ -32,7 +32,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
         service.BASE_URL = mockResponse(uri, arrayOfActions, ['limit': numberOfActions.toString()])
         when:
-        Action action = service.retrieveActions(numberOfActions).first()
+        Action action = service.findActions(numberOfActions).first()
 
         then:
         action.cardName == 'With due date'
@@ -55,7 +55,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
         service.BASE_URL = mockResponse(uri, arrayOfActions, ['limit': numberOfActions.toString()])
         when:
-        List<Action> actions = service.retrieveActions(numberOfActions)
+        List<Action> actions = service.findActions(numberOfActions)
 
         then:
         actions.size() == 0
@@ -98,9 +98,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
 
         expect:
         service.findAllCardsByDueDate(date - 10, date + 5)[0].labels == ['test1', 'test2']
-
     }
-
 
     private String mockResponse(String uri, Object response, Map params = [:]) {
         ErsatzServer ersatz = new ErsatzServer()
