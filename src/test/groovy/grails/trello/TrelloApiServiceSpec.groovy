@@ -14,6 +14,7 @@ class TrelloApiServiceSpec extends Specification implements ServiceUnitTest<Trel
     def setup() {
         config.trello.boards = ['aBoardName']
         config.trello.date.format = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        config.trello.date.formatDate = "yyyy-MM-dd"
     }
 
     def "Retrieve last action from a board"() {
